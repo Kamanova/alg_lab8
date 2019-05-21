@@ -12,18 +12,18 @@ class AdjListGraph:
         self.attributes = list()  # Список атрибутов вершин, list of dict
 
     def add_vertices(self, n):
-        """ Добавить n вершн в граф.
-
-        :param int n: колиичество вершин для добавления
-        """
+      #  """ Добавить n вершн в граф.
+        #:param int n: колиичество вершин для добавления
+       # """
         for i in range(n):
             self.adj.append(list())
             self.attributes.append(dict())
+            self.attributes.append({})
 
     def remove_vertex(self, v):
         """ Удалить вершину из графа
 
-        :param int v: индекс вершинаы графа
+        :param int v: индекс вершины графа
         """
         self.adj.pop(v)
         self.attributes.pop(v)
@@ -41,7 +41,8 @@ class AdjListGraph:
         :param int u: индекс вершины графа
         :param int v: индекс вершины графа
         """
-        raise NotImplemented("Реализуйте этот метод")
+        self.adj[u].append(v)
+        self.adj[v].append(u)
 
     def remove_edge(self, u, v):
         """ Удалить ребро, соединяющее вершины с индексами u и v
@@ -49,14 +50,18 @@ class AdjListGraph:
         :param int u: индекс вершины графа
         :param int v: индекс вершины графа
         """
-        raise NotImplemented("Реализуйте этот метод")
-
+        self.adj[u].remove(v)
+        self.adj[v].remove(u)
     def number_of_edges(self):
         """ Возвращает количество ребер в графе
 
         :rtype: int
         """
-        raise NotImplemented("Реализуйте этот метод")
+        count = 0
+        for i in self.adj:
+            for j in i:
+                count += 1
+        return count // 2
 
     def neighbors(self, v):
         """ Возвращает список индексов вершин, соседних с данной
@@ -64,7 +69,7 @@ class AdjListGraph:
         :param int v: индекс вершины графа
         :rtype: list of int
         """
-        raise NotImplemented("Реализуйте этот метод")
+        return list(self.adj[v])
 
     def draw(self, filename='test.gv'):
         """
