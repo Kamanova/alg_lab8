@@ -55,6 +55,7 @@ class AdjMatrixGraph:
         :param int v: индекс вершины графа
         """
         self.adj[u][v]=1
+        self.adj[v][u]=1
 
     def remove_edge(self, u, v):
         """ Удалить ребро, соединяющее вершины с индексами u и v
@@ -63,6 +64,7 @@ class AdjMatrixGraph:
         :param int v: индекс вершины графа
         """
         self.adj[u][v]=0
+        self.adj[v][u]=0
 
     def number_of_edges(self):
         """ Возвращает количество ребер в графе
@@ -122,7 +124,7 @@ def main():
     for i, c in zip(range(5), string.ascii_lowercase):
         g.attributes[i]['name'] = c
 
-    g.add_edge(0, 1)
+    g.add_edge(1, 0)
     g.add_edge(1, 2)
     g.add_edge(2, 3)
     g.add_edge(3, 4)
